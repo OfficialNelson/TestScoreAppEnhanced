@@ -38,7 +38,7 @@ function initializeResults() {
 
 function displayScores() {
     // Add your code here
-    let scoresTable = $('#scores_table');
+    let scoresTable = $('#scores');
     scoresTable.toggle();
 }
 
