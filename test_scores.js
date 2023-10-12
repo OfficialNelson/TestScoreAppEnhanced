@@ -72,10 +72,38 @@ function initializeScoresTable() {
 function addScore() {
     let score = $('#score');
     let name = $('#name');
-    if (score.val() === '' || name.val() === '') {
-        alert('Name and score must have values');
+
+    // Add Step 3 code here
+    let validated = true; // Create a boolean variable to track input validation
+
+    // Validate Name
+    let pattern = /[^A-Za-z ]/;
+    if (name.val() === '' || pattern.test(name.val())) {
+        if (name.val() === '') {
+            $("#name_span").text(" Required");
+        } else {
+            $("#name_span").text(" Invalid");
+        }
+        validated = false;
+    }
+
+    // Validate Score
+    if (score.val() === '' || isNaN(score.val())) {
+        if (isNaN(score.val())) {
+            $("#score_span").text(" Invalid");
+        } else {
+            $("#score_span").text(" Required");
+        }
+        validated = false;
+    }
+
+    // If there's a validation error, don't add the score
+    if (!validated) {
         return;
     }
+    
+    // Rest of your addScore function
+
     scoresArr.push(parseInt(score.val()));
     namesArr.push($("#name").val());
     initializeScoresTable();
@@ -85,6 +113,7 @@ function addScore() {
     $('#scores').show();
     $('#results').show();
 }
+
 
 window.onload = function () {
     $('#display_results').on('click',  function() {
